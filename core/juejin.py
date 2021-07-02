@@ -21,6 +21,9 @@ class Juejin(object):
     # 掘金草稿箱文章URL
     article_draft_url = "https://api.juejin.cn/content_api/v1/article_draft/query_list"
 
+    # 掘金文章详情
+    article_draft_detail_url = "https://api.juejin.cn/content_api/v1/article_draft/detail"
+
     def __init__(self, driver_cookies):
 
         self.session = requests.session()
@@ -52,14 +55,17 @@ class Juejin(object):
         result = self.request('post', self.article_draft_url)
         return result.get("data", [])
 
+    def get_detail(self, draft_id):
+        return self.request("post", self.article_draft_detail_url, json={"draft_id": draft_id})
+
     def publish(self, draft_id):
 
-        data = {
+        json = {
             "draft_id": draft_id,
             "sync_to_org": False,
             "column_ids": []
         }
-        result = self.request('post', self.publish_url, data=data)
+        result = self.request('post', self.publish_url, json=json)
         return result
 
 
