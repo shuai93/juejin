@@ -87,7 +87,7 @@ class JuejinDriver(object):
             raise Exception("Prepare login is error" + str(e))
         flag = False
         for retry in range(self.retry):
-            self.get_cookies(retry + 2)
+            self.get_cookies(retry + 5)
             try:
                 avatar = self.driver.find_element(By.XPATH, '''//img[@alt="西红柿蛋炒饭的头像"]''')
                 if avatar:
@@ -136,7 +136,7 @@ class JuejinDriver(object):
 
         ActionChains(self.driver).move_to_element(login_button).click().perform()
 
-        time.sleep(2)
+        time.sleep(5)
 
         other_login_span = self.driver.find_element(By.XPATH, '''//span[text()="
           其他登录方式
@@ -157,4 +157,4 @@ class JuejinDriver(object):
       "]''')
         ActionChains(self.driver).move_to_element(login_button).click().perform()
 
-        time.sleep(2)
+        time.sleep(5)
