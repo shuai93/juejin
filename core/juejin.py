@@ -10,6 +10,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 
 from .track import track
+from .config import *
 
 
 class Juejin(object):
@@ -65,19 +66,17 @@ class JuejinDriver(object):
     screenshot_verify_image = 'temp/verify_image.png'
     screenshot_prepare_login = 'temp/prepare_login.png'
 
-    # 掘金用户名密码
-    juejin_username = "18356097679"
-    juejin_password = "ss4648821"
-    juejin_nickname = "西红柿蛋炒饭"
-
     # 重试
     retry = 10
 
     def __init__(self):
         chrome_options = Options()
         chrome_options.add_argument('--headless')
+        self.juejin_username = juejin_username
+        self.juejin_password = juejin_password
+        self.juejin_nickname = juejin_nickname
 
-        self.driver = webdriver.Chrome(executable_path="./driver/chromedriver", chrome_options=chrome_options)
+        self.driver = webdriver.Chrome(executable_path="./driver/linux/chromedriver", chrome_options=chrome_options)
         self.driver.get(self.juejin_home)
 
     def run(self):

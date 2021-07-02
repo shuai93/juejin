@@ -1,0 +1,32 @@
+name: Python package
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: 00 02 * * *
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requeirments.txt
+      - name: execute py script
+        env:
+          FM_PASSWORD: ${{ secrets.juejin_username }}
+          FM_USERNAME: ${{ secrets.juejin_password }}
+          MAIL_ADDRESS: ${{ secrets.juejin_nickname }}
+
+        run: |
+          python run.py
