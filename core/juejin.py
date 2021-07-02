@@ -45,7 +45,7 @@ class Juejin(object):
 
         response = self.session.request(*args, **kwargs)
         if response.status_code != 200:
-            raise Exception("请求错误")
+            raise Exception("Request error")
         return response.json()
 
     def get_draft(self):
@@ -54,12 +54,12 @@ class Juejin(object):
 
     def publish(self, draft_id):
 
-        body = {
+        data = {
             "draft_id": draft_id,
             "sync_to_org": False,
             "column_ids": []
         }
-        result = self.request('post', self.publish_url, body=body)
+        result = self.request('post', self.publish_url, data=data)
         return result
 
 
@@ -80,7 +80,6 @@ class JuejinDriver(object):
         self.juejin_username = JUEJIN_USERNAME
         self.juejin_password = JUEJIN_PASSWORD
         self.juejin_nickname = JUEJIN_NICKNAME
-        print(JUEJIN_USERNAME, JUEJIN_PASSWORD, JUEJIN_NICKNAME)
         self.driver = webdriver.Chrome(executable_path="./driver/linux/chromedriver", chrome_options=chrome_options)
         self.driver.get(self.juejin_home)
 
