@@ -36,7 +36,7 @@ class Juejin(object):
 
     def push_draft_last_one(self):
         article_draft = self.get_draft()
-        if article_draft:
+        if not article_draft:
             raise Exception("The article draft is empty")
         draft_id = article_draft[0].get("id")
         return draft_id, self.publish(draft_id)
