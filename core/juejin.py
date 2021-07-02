@@ -75,7 +75,7 @@ class JuejinDriver(object):
         self.juejin_username = JUEJIN_USERNAME
         self.juejin_password = JUEJIN_PASSWORD
         self.juejin_nickname = JUEJIN_NICKNAME
-
+        print(JUEJIN_USERNAME, JUEJIN_PASSWORD, JUEJIN_NICKNAME)
         self.driver = webdriver.Chrome(executable_path="./driver/linux/chromedriver", chrome_options=chrome_options)
         self.driver.get(self.juejin_home)
 
