@@ -11,9 +11,9 @@ def main():
     juejin_driver = JuejinDriver()
     try:
         juejin_cookies = juejin_driver.run()
-        print(juejin_cookies)
-        response = Juejin(juejin_cookies).get_draft()
-        print(response)
+        draft_id, response = Juejin(juejin_cookies).push_draft_last_one()
+        print(f"本次发布文章的id ：{draft_id}")
+        print(f"本次发布文章的结果为：{response}")
     except Exception as e:
         traceback.print_exc()
         print(e)

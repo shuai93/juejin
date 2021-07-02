@@ -34,6 +34,13 @@ class Juejin(object):
             )
             self.session.cookies.set_cookie(cookie_obj)
 
+    def push_draft_last_one(self):
+        article_draft = self.get_draft()
+        if article_draft:
+            raise Exception("The article draft is empty")
+        draft_id = article_draft[0].get("id")
+        return draft_id, self.publish(draft_id)
+
     def request(self, *args, **kwargs):
 
         response = self.session.request(*args, **kwargs)
@@ -43,7 +50,6 @@ class Juejin(object):
 
     def get_draft(self):
         result = self.request('post', self.article_draft_url)
-        print(result)
         return result.get("data", [])
 
     def publish(self, draft_id):
@@ -54,7 +60,6 @@ class Juejin(object):
             "column_ids": []
         }
         result = self.request('post', self.publish_url, body=body)
-        print(result)
         return result
 
 
