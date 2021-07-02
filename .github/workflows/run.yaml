@@ -24,9 +24,9 @@ jobs:
           pip install -r requeirments.txt
       - name: execute py script
         env:
-          FM_PASSWORD: ${{ secrets.JUEJIN_USERNAME }}
-          FM_USERNAME: ${{ secrets.JUEJIN_PASSWORD }}
-          MAIL_ADDRESS: ${{ secrets.JUEJIN_NICKNAME }}
+          JUEJIN_USERNAME: ${{ secrets.JUEJIN_USERNAME }}
+          JUEJIN_PASSWORD: ${{ secrets.JUEJIN_PASSWORD }}
+          JUEJIN_NICKNAME: ${{ secrets.JUEJIN_NICKNAME }}
 
         run: |
           python main.py
