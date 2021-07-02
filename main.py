@@ -1,9 +1,13 @@
 import traceback
+import os
 
 from core import Juejin, JuejinDriver
 
 
 def main():
+    if not os.path.exists("./temp"):
+        os.mkdir("./temp")
+
     juejin_driver = JuejinDriver()
     try:
         juejin_cookies = juejin_driver.run()
