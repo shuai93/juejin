@@ -88,7 +88,7 @@ class JuejinDriver(object):
 
     def __init__(self):
         chrome_options = Options()
-        # chrome_options.add_argument('--headless')
+        chrome_options.add_argument('--headless')
         self.juejin_username = JUEJIN_USERNAME
         self.juejin_password = JUEJIN_PASSWORD
         self.juejin_nickname = JUEJIN_NICKNAME
