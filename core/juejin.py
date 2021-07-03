@@ -173,4 +173,4 @@ class JuejinDriver(object):
       "]''')
         ActionChains(self.driver).move_to_element(login_button).click().perform()
 
-        time.sleep(5)
+        time.sleep(6)
