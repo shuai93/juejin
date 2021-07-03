@@ -103,7 +103,7 @@ class JuejinDriver(object):
             raise Exception("Prepare login is error" + str(e))
         flag = False
         for retry in range(self.retry):
-            self.get_cookies(retry // 3 + 3)
+            self.get_cookies(retry // 3 + 5)
             try:
                 avatar = self.driver.find_element(By.XPATH, '''//img[@alt="西红柿蛋炒饭的头像"]''')
                 if avatar:
