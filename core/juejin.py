@@ -42,7 +42,13 @@ class Juejin(object):
         if not article_draft:
             raise Exception("The article draft is empty")
         draft_id = article_draft[0].get("id")
-        return draft_id, self.publish(draft_id)
+
+        result = self.publish(draft_id)
+
+        if result.get("err_no", "") != 0:
+            err_msg = result.get("err_no", "err_msg")
+            raise Exception(f"Juejin push article error, error message is {err_msg} ")
+        return result.get("data", {})
 
     def request(self, *args, **kwargs):
 
@@ -82,7 +88,7 @@ class JuejinDriver(object):
 
     def __init__(self):
         chrome_options = Options()
-        chrome_options.add_argument('--headless')
+        # chrome_options.add_argument('--headless')
         self.juejin_username = JUEJIN_USERNAME
         self.juejin_password = JUEJIN_PASSWORD
         self.juejin_nickname = JUEJIN_NICKNAME
@@ -97,7 +103,7 @@ class JuejinDriver(object):
             raise Exception("Prepare login is error" + str(e))
         flag = False
         for retry in range(self.retry):
-            self.get_cookies(retry + 5)
+            self.get_cookies(retry // 3 + 3)
             try:
                 avatar = self.driver.find_element(By.XPATH, '''//img[@alt="西红柿蛋炒饭的头像"]''')
                 if avatar:

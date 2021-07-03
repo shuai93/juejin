@@ -7,6 +7,8 @@ idna==2.10
 ipython==7.16.1
 ipython-genutils==0.2.0
 jedi==0.18.0
+Jinja2==3.0.1
+MarkupSafe==2.0.1
 numpy==1.19.5
 opencv-python==4.5.2.54
 parso==0.8.2

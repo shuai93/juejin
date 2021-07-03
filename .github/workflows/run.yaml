@@ -27,6 +27,14 @@ jobs:
           JUEJIN_USERNAME: ${{ secrets.JUEJIN_USERNAME }}
           JUEJIN_PASSWORD: ${{ secrets.JUEJIN_PASSWORD }}
           JUEJIN_NICKNAME: ${{ secrets.JUEJIN_NICKNAME }}
+          MAIL_ADDRESS: ${{ secrets.MAIL_ADDRESS }}
+          MAIL_HOST: ${{ secrets.MAIL_HOST }}
+          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+          MAIL_PORT: ${{ secrets.MAIL_PORT }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+          MAIL_USER: ${{ secrets.MAIL_USER }}
+          SWITCH: ${{ secrets.SWITCH }}
+
 
         run: |
           python main.py
