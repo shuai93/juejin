@@ -18,9 +18,16 @@
 
 | 变量 | 描述 |  示例 | 用途 |
 | --- | --- |  --- |  --- |
-| JUEJIN_USERNAME | 掘金登录帐号 |  xxx |  登录|
-| JUEJIN_PASSWORD | 掘金登录密码 | xxx | 登录 |
-| JUEJIN_NICKNAME | 掘金昵称 | 西红柿蛋炒饭 | 判断登录是否成功 |
+| JUEJIN_USERNAME | 掘金登录帐号 |  xxx | 
+| JUEJIN_PASSWORD | 掘金登录密码 | xxx |
+| JUEJIN_NICKNAME | 掘金昵称 | 西红柿蛋炒饭 | 
+| MAIL_USER | 发件人邮箱用户名 |  xxx.qq.com | 
+| MAIL_ADDRESS | 发件人邮箱地址 | xxx.qq.com |
+| MAIL_HOST | 发件人邮箱服务器 | smt.qq.com |
+| MAIL_PASSWORD | 发件人邮箱密码 | xxxxxx |
+| MAIL_PORT | 邮箱服务器端口 |  465 |
+| MAIL_TO | 收信邮箱 | xxx.qq.com |
+| SWITCH | 自动发布开关 | on |
 
 
 ### 3. 运行  Github Action ▶️

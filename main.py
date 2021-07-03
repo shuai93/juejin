@@ -10,7 +10,7 @@ def main():
                 MAIL_USER, JUEJIN_USERNAME, JUEJIN_PASSWORD, JUEJIN_NICKNAME, SWITCH]):
         raise Exception("Wrong configuration")
 
-    if SWITCH == "on":
+    if SWITCH != "on":
         return
 
     if not os.path.exists("./temp"):
