@@ -44,9 +44,9 @@ class Juejin(object):
         draft_id = article_draft[0].get("id")
 
         result = self.publish(draft_id)
-
+        print(result)
         if result.get("err_no", "") != 0:
-            err_msg = result.get("err_no", "err_msg")
+            err_msg = result.get("err_msg", "")
             raise Exception(f"Juejin push article error, error message is {err_msg} ")
         return result.get("data", {})
 
@@ -86,6 +86,10 @@ class JuejinDriver(object):
     # 重试
     retry = 10
 
+    # 最长等待时间
+
+    wait = 10
+
     def __init__(self):
         chrome_options = Options()
         chrome_options.add_argument('--headless')
@@ -93,6 +97,7 @@ class JuejinDriver(object):
         self.juejin_password = JUEJIN_PASSWORD
         self.juejin_nickname = JUEJIN_NICKNAME
         self.driver = webdriver.Chrome(executable_path="./driver/linux/chromedriver", chrome_options=chrome_options)
+        self.driver.implicitly_wait(self.wait)
         self.driver.get(self.juejin_home)
 
     def run(self):
@@ -103,7 +108,7 @@ class JuejinDriver(object):
             raise Exception("Prepare login is error" + str(e))
         flag = False
         for retry in range(self.retry):
-            self.get_cookies(retry // 3 + 5)
+            self.get_cookies()
             try:
                 avatar = self.driver.find_element(By.XPATH, '''//img[@alt="西红柿蛋炒饭的头像"]''')
                 if avatar:
@@ -117,11 +122,10 @@ class JuejinDriver(object):
 
         return self.driver.get_cookies()
 
-    def get_cookies(self, num):
+    def get_cookies(self):
         slider_url, background_url = self.get_verify_image_url()
         result = track.get_track(slider_url, background_url)
         self.click_and_move(result)
-        time.sleep(num)
 
     def click_and_move(self, slide_track):
         verify_div = self.driver.find_element(By.XPATH, '''//div[@class="sc-kkGfuU bujTgx"]''')
@@ -152,14 +156,11 @@ class JuejinDriver(object):
 
         ActionChains(self.driver).move_to_element(login_button).click().perform()
 
-        time.sleep(5)
-
         other_login_span = self.driver.find_element(By.XPATH, '''//span[text()="
           其他登录方式
         "]''')
 
         ActionChains(self.driver).move_to_element(other_login_span).click().perform()
-        time.sleep(2)
 
         username_input = self.driver.find_element(By.XPATH, '//input[@name="loginPhoneOrEmail"]')
         password_input = self.driver.find_element(By.XPATH, '//input[@name="loginPassword"]')
@@ -172,5 +173,3 @@ class JuejinDriver(object):
         登录
       "]''')
         ActionChains(self.driver).move_to_element(login_button).click().perform()
-
-        time.sleep(6)
