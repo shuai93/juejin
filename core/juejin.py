@@ -110,7 +110,8 @@ class JuejinDriver(object):
         for retry in range(self.retry):
             self.get_cookies()
             try:
-                avatar = self.driver.find_element(By.XPATH, '''//img[@alt="西红柿蛋炒饭的头像"]''')
+                juejin_avatar_alt = self.juejin_nickname + "的头像"
+                avatar = self.driver.find_element(By.XPATH, f'//img[@alt="{juejin_avatar_alt}"]')
                 if avatar:
                     flag = True
                     break
