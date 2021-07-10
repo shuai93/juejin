@@ -23,7 +23,7 @@ def main():
     }
     try:
         juejin_cookies = juejin_driver.run()
-        article = Juejin(juejin_cookies).push_draft_last_one()
+        article = Juejin(driver_cookies=juejin_cookies).push_draft_last_one()
 
         body['payload'] = {
             "result": {
