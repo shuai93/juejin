@@ -11,6 +11,7 @@ opencv-python = "*"
 selenium = "*"
 numpy = "*"
 jinja2 = "*"
+neo4j = "*"
 
 [requires]
 python_version = "3.6"
