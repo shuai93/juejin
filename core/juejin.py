@@ -176,9 +176,9 @@ def update_and_republish():
             "id": article_draft.get("id"),
         }
 
-        print(article)
-        print(juejin.draft_update(article))
-        print(juejin.draft_publish(draft_id, column_ids))
+        print("文章：" + article.get("title"), end=" ")
+        print("更新结果为：" + juejin.draft_update(article).get("err_msg"), end=" ")
+        print("发布结果为：" + juejin.draft_publish(draft_id, column_ids).get("err_msg"))
 
     # 主调度函数
     def do(data):

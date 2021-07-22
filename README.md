@@ -5,6 +5,15 @@
 
 一个关于掘金的自动发布文章的脚本
 
+主要的技术点如下：
+
+- Selenium 模拟浏览器操作
+- 滑块验证码识别
+- request 发送 HTTP 请求
+- Github Action 部署项目
+
+如果你有兴趣可以查看[我掘金的专栏](https://juejin.cn/column/6980219687397228551)，可以一步步了解我是如何实现这个项目的。
+
 
 ## 项目部署 🥳
 
@@ -52,17 +61,31 @@ ps：默认情况下提交代码到 master 分支就会触发一次构建。
 
 ![image](https://user-images.githubusercontent.com/21220871/124370449-85118100-dcaa-11eb-99a9-9ce0c5de57ae.png)
 
+## 其他功能
 
-## 项目关键技术总结 🏳️
+`core/juejin.py update_and_republish` 新增文章批量更新功能。
 
-主要的技术点如下：
+主要目的用脚本的方式移除掘金活动的文案及链接， 以保证文章的美感。
 
-- Selenium 模拟浏览器操作
-- 滑块验证码识别
-- request 发送 HTTP 请求
-- Github Action 部署项目
+使用方式为
 
-如果你有兴趣可以查看[我掘金的专栏](https://juejin.cn/column/6980219687397228551)，可以一步步了解我是如何实现这个项目的。
+```bash
+# 1. 配置sessionid
+
+# 2. 配置活动链接以及活动时间
+
+# 3. 执行脚本
+python3  core/juejin.py
+
+# 4. 查看结果
+文章：程序员，申请个域名吧 更新结果为：success 发布结果为：success
+文章：掘金登录引发的思考 更新结果为：success 发布结果为：success
+文章：Python Selenium 使用指南 更新结果为：success 发布结果为：success
+文章：Java 常见知识整理 更新结果为：success 发布结果为：success
+文章：Django REST framework 完结 更新结果为：success 发布结果为：success
+```
+
+
 
 
 ## 写在最后 🔚
