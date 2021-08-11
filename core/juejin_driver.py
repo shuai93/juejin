@@ -1,6 +1,5 @@
 
 import time
-
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver import ActionChains
@@ -15,6 +14,9 @@ class JuejinDriver(object):
 
     # 掘金首页
     juejin_home = "https://juejin.cn/"
+
+    # 掘金签到页面
+    juejin_sign = "https://juejin.cn/user/center/signin"
 
     # 截屏
     screenshot_verify_image = 'temp/verify_image.png'
@@ -56,6 +58,9 @@ class JuejinDriver(object):
 
         if flag is False:
             raise Exception(f"Verify slide image error and retry {self.retry}! ")
+
+        # 签到
+        self.do_sign()
 
         return self.driver.get_cookies()
 
@@ -110,3 +115,15 @@ class JuejinDriver(object):
         登录
       "]''')
         ActionChains(self.driver).move_to_element(login_button).click().perform()
+
+    def do_sign(self):
+        self.driver.get("https://juejin.cn/user/center/signin")
+        time.sleep(4)
+        sign_button = self.driver.find_element(By.XPATH, '''//button[text()="
+              立即签到
+            "]''')
+        ActionChains(self.driver).move_to_element(sign_button).click().perform()
+        ActionChains(self.driver).move_to_element(sign_button).click().perform()
+        time.sleep(2)
+        print("签到结束")
+
