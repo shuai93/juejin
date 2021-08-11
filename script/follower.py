@@ -72,7 +72,7 @@ def main():
     app = App(url, user, password)
 
     juejin = JueJin()
-    user_id, user_name = "1556564194374926", "掘金酱"
+    user_id, user_name = "993614678985085", "西红柿蛋炒饭"
     cursor, limit = 0, 20
     followees, followers = [], []
 
@@ -116,6 +116,11 @@ def main():
             session.write_transaction(
                 app.create_friendship, person['user_name'], user_name)
 
+    names1 = {f["user_name"] for f in followees}
+    names2 = {f["user_name"] for f in followers}
+
+    # 查看我关注却没有关注我的人
+    print(names1 - names2)
     app.close()
 
 
