@@ -59,9 +59,6 @@ class JuejinDriver(object):
         if flag is False:
             raise Exception(f"Verify slide image error and retry {self.retry}! ")
 
-        # 签到
-        self.do_sign()
-
         return self.driver.get_cookies()
 
     def get_cookies(self):
@@ -119,11 +116,26 @@ class JuejinDriver(object):
     def do_sign(self):
         self.driver.get("https://juejin.cn/user/center/signin")
         time.sleep(4)
-        sign_button = self.driver.find_element(By.XPATH, '''//button[text()="
+
+        try:
+            signed_button = self.driver.find_element(By.XPATH, '''//button[text()="
+              今日已签到
+            "]''')
+        except NoSuchElementException:
+            signed_button = None
+            pass
+
+        if signed_button is not None:
+            print("*" * 10 + " 今日已签到！")
+
+        try:
+            sign_button = self.driver.find_element(By.XPATH, '''//button[text()="
               立即签到
             "]''')
+        except NoSuchElementException:
+            raise Exception("签到按钮获取失败，请查看页面是否有变化")
         ActionChains(self.driver).move_to_element(sign_button).click().perform()
         ActionChains(self.driver).move_to_element(sign_button).click().perform()
         time.sleep(2)
-        print("签到结束")
+        print("-" * 10 + " > 签到结束！")
 

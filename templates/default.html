@@ -285,14 +285,26 @@
         <td>&nbsp;</td>
         <td class="container">
           <div class="content" style="text-align:center">
-              <p style="text-align:left" > 亲爱的 <span style="color: #34495e"> {{ payload.get('user')}} 文章发布成功 ：</span></p>
-              <p style="text-align:left" > 标题：
-                <span style="color: #2f5e0a"> {{payload.get('result', {}).get('title')}} </span>
-              </p>
-              <p style="text-align:left" > 链接：
-                <span style="color: #172a5e"> {{ 'https://juejin.cn/post/' ~ payload.get('result', {}).get('article_id') }} </span>
-              </p>
+              <p style="text-align:left" > 亲爱的 <span style="color: #34495e"> {{ payload.get('user')}} 定时任务结果为：</span></p>
+              {% if payload.get('publish_result', False) %}
+                <br>
+                <p style="text-align:left" >文章发布成功</p>
+                <p style="text-align:left" > 标题：
+                  <span style="color: #2f5e0a"> {{payload.get('publish_result', {}).get('title')}} </span>
+                </p>
+                <p style="text-align:left" > 链接：
+                  <span style="color: #172a5e"> {{ 'https://juejin.cn/post/' ~ payload.get('publish_result', {}).get('article_id') }} </span>
+                </p>
+              {% endif %}
 
+              {% if payload.get('sign_result', False) %}
+                  <br>
+                  <p style="text-align:left" >签到抽奖成功</p>
+                  <p style="text-align:left" > 抽奖结果为：
+                    <span style="color: #2f5e0a"> {{payload.get('sign_result', {}).get('lottery_name')}} </span>
+                  </p>
+
+              {% endif %}
             <!-- START FOOTER -->
             <div class="footer">
               <table border="0" cellpadding="0" cellspacing="0">

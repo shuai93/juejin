@@ -5,7 +5,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from jinja2 import FileSystemLoader, Environment
 
-from .config import *
+from core.config import *
 
 
 class EmailPoster(object):
@@ -22,11 +22,11 @@ class EmailPoster(object):
 
     def send(self, data: dict):
         payload = data.get("payload", {})
-        if payload:
+        if data.get("body") is None and payload:
             template = self.get_template()
             content = template.render(payload=payload)
         else:
-            content = data.get('body', '')
+            content = data.get('body', '默认内容')
         subject = data.get('subject', '')
         mail_to = data.get('to', [])
         mail_from = data.get('from', MAIL_ADDRESS)
@@ -50,3 +50,4 @@ class EmailPoster(object):
             stp.quit()
         except Exception as e:
             print(traceback.format_exc(e))
+
