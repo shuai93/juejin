@@ -1,13 +1,17 @@
-
 import requests
 import re
 import time
+import argparse
+import sys
+import os
+import importlib
 
 from requests import cookies
 
-from core.juejin import Juejin
-
-import argparse
+# 导入掘金的包
+project_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+sys.path.extend([project_dir])
+core = importlib.import_module("core")
 
 """
 一些参数的demo
@@ -15,16 +19,14 @@ session_id = "4085b767dcb6"
 act_start_datetime = "2021-06-01 00:00:00"
 act_end_datetime = "2021-06-30 23:59:59"
 pattern="这是我参与更文挑战的第\d*天，活动详情查看： \[更文挑战\]\(https\://juejin\.cn/post/6967194882926444557\)"
-
-「本文已参与好文召集令活动，点击查看：\[后端、大前端双赛道投稿，2万元奖池等你挑战！\]\(https\://juejin\.cn/post/6978685539985653767\)」
+pattern1=「本文已参与好文召集令活动，点击查看：\[后端、大前端双赛道投稿，2万元奖池等你挑战！\]\(https\://juejin\.cn/post/6978685539985653767\)」
 """
 
-
 parser = argparse.ArgumentParser(description='更新文章活动链接重新发布')
-parser.add_argument('session_id', type=str, help='掘金cookies sessionid')
-parser.add_argument('act_start_datetime', type=str, help='活动开始时间')
-parser.add_argument('act_end_datetime', type=str, help='活动结束时间')
-parser.add_argument('pattern_str', type=str, help='活动链接的正则表达式')
+parser.add_argument('session_id', type=str, help='掘金cookies sessionid', default="4085b767dcb6")
+parser.add_argument('act_start_datetime', type=str, help='活动开始时间', default="2021-06-01 00:00:00")
+parser.add_argument('act_end_datetime', type=str, help='活动结束时间', default="2021-07-01 00:00:00")
+parser.add_argument('pattern_str', type=str, help='活动链接的正则表达式', default="")
 
 args = parser.parse_args()
 
@@ -39,8 +41,8 @@ def update_and_republish(session_id, act_start_datetime, act_end_datetime, patte
         name="sessionid",
         value=session_id
     )
-    juejin = Juejin(cookie_obj=cookie)
 
+    juejin = core.Juejin(cookie_obj=cookie)
     user_id = juejin.get_user().get("data", {}).get("user_id")
     start_flag = True
     cursor = "0"

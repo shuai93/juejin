@@ -1,21 +1,38 @@
-from core.juejin import Juejin
-
 import requests
+import argparse
+import os
+import importlib
+import sys
+
 
 from requests import cookies
 
+# 导入掘金的包
+project_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+sys.path.extend([project_dir])
+core = importlib.import_module("core")
 
-def lottery():
-    # session id 自行设置
-    session_id = "4085b767c41edc448faec9ab1b53dcb6"
+
+"""
+一些参数
+session_id = "4085b767dcb6"
+"""
+
+parser = argparse.ArgumentParser(description='掘金抽奖')
+parser.add_argument('session_id', type=str, help='掘金cookies sessionid')
+
+
+args = parser.parse_args()
+
+
+def lottery(session_id):
 
     cookie = requests.cookies.create_cookie(
         domain=".juejin.cn",
         name="sessionid",
         value=session_id
     )
-    juejin = Juejin(cookie_obj=cookie)
-
+    juejin = core.Juejin(cookie_obj=cookie)
     gift = {}
     num = 1
 
@@ -41,4 +58,4 @@ def lottery():
 
 
 if __name__ == '__main__':
-    lottery()
+    lottery(args.session_id)
