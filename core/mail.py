@@ -22,11 +22,13 @@ class EmailPoster(object):
 
     def send(self, data: dict):
         payload = data.get("payload", {})
-        if data.get("body") is None and payload:
+        if payload:
             template = self.get_template()
             content = template.render(payload=payload)
-        else:
+        elif data.get("body"):
             content = data.get('body', '默认内容')
+        else:
+            return
         subject = data.get('subject', '')
         mail_to = data.get('to', [])
         mail_from = data.get('from', MAIL_ADDRESS)

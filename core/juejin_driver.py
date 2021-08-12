@@ -30,11 +30,11 @@ class JuejinDriver(object):
 
     def __init__(self):
         chrome_options = Options()
-        chrome_options.add_argument('--headless')
+        # chrome_options.add_argument('--headless')
         self.juejin_username = JUEJIN_USERNAME
         self.juejin_password = JUEJIN_PASSWORD
         self.juejin_nickname = JUEJIN_NICKNAME
-        self.driver = webdriver.Chrome(executable_path="./driver/linux/chromedriver", chrome_options=chrome_options)
+        self.driver = webdriver.Chrome(executable_path="./driver/mac/chromedriver", chrome_options=chrome_options)
         self.driver.implicitly_wait(self.wait)
         self.driver.get(self.juejin_home)
 
@@ -127,6 +127,7 @@ class JuejinDriver(object):
 
         if signed_button is not None:
             print("*" * 10 + " 今日已签到！")
+            return False
 
         try:
             sign_button = self.driver.find_element(By.XPATH, '''//button[text()="
@@ -138,4 +139,4 @@ class JuejinDriver(object):
         ActionChains(self.driver).move_to_element(sign_button).click().perform()
         time.sleep(2)
         print("-" * 10 + " > 签到结束！")
-
+        return True

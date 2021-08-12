@@ -6,7 +6,7 @@ from core.config import *
 
 def main():
 
-    if not all([MAIL_TO, MAIL_PORT, MAIL_HOST, MAIL_ADDRESS, MAIL_PASSWORD,
+    if not all([MAIL_TO, MAIL_PORT, MAIL_HOST, MAIL_ADDRESS, MAIL_PASSWORD, PUBLISH_SWITCH,
                 MAIL_USER, JUEJIN_USERNAME, JUEJIN_PASSWORD, JUEJIN_NICKNAME, SWITCH]):
         raise Exception("Wrong configuration")
 
@@ -22,10 +22,11 @@ def main():
     }
     # 掘金登录签到过程
     juejin_driver = JuejinDriver()
-    juejin_cookies = None
+    juejin_cookies, sign_return = None, None
 
     try:
         juejin_cookies = juejin_driver.run()
+        sign_return = juejin_driver.do_sign()
     except Exception as e:
         traceback.print_exc()
         body['body'] = "不好意登录签到遇到问题了， 结果为：" + str(e) + "\n"
@@ -37,33 +38,43 @@ def main():
         EmailPoster().send(data=body)
         return
 
-    # 掘金发布文章过程
     juejin = Juejin(driver_cookies=juejin_cookies)
-
-    lottery_result = juejin.draw_lottery()
-
-    if lottery_result.get("err_no") == 0:
-        lottery_name = lottery_result.get("data", {}).get("lottery_name")
-
-    else:
-        lottery_name = "抽奖失败，接口返回值" + lottery_result
 
     body['payload'] = {
         "user": JUEJIN_NICKNAME,
-        "sign_result": {
-            "lottery_name": lottery_name
-        }
     }
-    try:
 
-        article = juejin.push_draft_last_one()
-        body['payload']['publish_result'] = {
-            "title": article.get("title", ""),
-            "article_id": article.get("article_id", ""),
-        }
-    except Exception as e:
-        traceback.print_exc()
-        body['body'] = "不好意思发布遇到问题了， 结果为：" + str(e) + "\n"
+    if sign_return is True:
+        lottery_result = juejin.draw_lottery()
+
+        if lottery_result.get("err_no") == 0:
+            message = "抽奖成功，奖品为：" + lottery_result.get("data", {}).get("lottery_name")
+
+        else:
+            message = "抽奖失败，接口返回值：" + lottery_result
+
+    elif sign_return is False:
+        message = "今日已签到！"
+    else:
+        message = "未知结果？"
+
+    body['payload']['sign_result'] = {
+        "message": message
+    }
+
+    # 掘金发布文章过程
+    if PUBLISH_SWITCH == "on":
+        try:
+
+            article = juejin.push_draft_last_one()
+            body['payload']['publish_result'] = {
+                "message": article.get("title", "") + " https://juejin.cn/post/" + article.get("article_id", ""),
+            }
+        except Exception as e:
+            traceback.print_exc()
+            body['payload']['publish_result'] = {
+                "message": "不好意思发布遇到问题了， 结果为：" + str(e) + "\n"
+            }
 
     EmailPoster().send(data=body)
 

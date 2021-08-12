@@ -12,3 +12,4 @@ MAIL_TO = os.getenv("MAIL_TO")
 MAIL_USER = os.getenv("MAIL_USER")
 
 SWITCH = os.getenv("SWITCH", "on")
+PUBLISH_SWITCH = os.getenv("PUBLISH_SWITCH", "off")

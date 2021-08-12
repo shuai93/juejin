@@ -34,7 +34,7 @@ jobs:
           MAIL_TO: ${{ secrets.MAIL_TO }}
           MAIL_USER: ${{ secrets.MAIL_USER }}
           SWITCH: ${{ secrets.SWITCH }}
-
+          PUBLISH_SWITCH: ${{ secrets.PUBLISH_SWITCH }}
 
         run: |
           python main.py
