@@ -30,11 +30,11 @@ class JuejinDriver(object):
 
     def __init__(self):
         chrome_options = Options()
-        # chrome_options.add_argument('--headless')
+        chrome_options.add_argument('--headless')
         self.juejin_username = JUEJIN_USERNAME
         self.juejin_password = JUEJIN_PASSWORD
         self.juejin_nickname = JUEJIN_NICKNAME
-        self.driver = webdriver.Chrome(executable_path="./driver/mac/chromedriver", chrome_options=chrome_options)
+        self.driver = webdriver.Chrome(executable_path="./driver/linux/chromedriver", chrome_options=chrome_options)
         self.driver.implicitly_wait(self.wait)
         self.driver.get(self.juejin_home)
 
