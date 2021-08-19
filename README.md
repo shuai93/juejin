@@ -3,7 +3,7 @@
 
 ## 项目描述 🔑
 
-一个关于掘金的自动发布文章的脚本
+一个关于掘金的自动化的脚本
 
 主要的技术点如下：
 
@@ -26,6 +26,8 @@
 
 ### 2. Github Action Secrets 配置  🕹
 
+关于邮件配置，推荐使用QQ邮箱。163邮箱可能会有问题。
+
 | 变量 | 描述 |  示例 | 用途 |
 | --- | --- |  --- |  --- |
 | JUEJIN_USERNAME | 掘金登录帐号 |  xxx | 
@@ -37,7 +39,8 @@
 | MAIL_PASSWORD | 发件人邮箱密码 | xxxxxx |
 | MAIL_PORT | 邮箱服务器端口 |  465 |
 | MAIL_TO | 收信邮箱 | xxx.qq.com |
-| SWITCH | 自动发布开关 | on |
+| SWITCH | 脚本开关 | on |
+| PUBLISH_SWITCH | 自动发布开关 | off |
 
 ![image](https://user-images.githubusercontent.com/21220871/124370464-ba1dd380-dcaa-11eb-9c51-30cab0fdf98c.png)
 
