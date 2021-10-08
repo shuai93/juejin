@@ -3,7 +3,7 @@
 
 ## 项目描述 🔑
 
-一个关于掘金的自动发布文章的脚本
+一个关于掘金的自动化的脚本
 
 主要的技术点如下：
 
@@ -11,6 +11,14 @@
 - 滑块验证码识别
 - request 发送 HTTP 请求
 - Github Action 部署项目
+
+主要的功能点：
+
+- 掘金自动登录
+- 掘金自动签到、抽奖
+- 自动发布文章
+- 批量更新文章内容（统一删除活动链接）
+- 批量抽奖（梭哈钻石-解放双手）
 
 如果你有兴趣可以查看[我掘金的专栏](https://juejin.cn/column/6980219687397228551)，可以一步步了解我是如何实现这个项目的。
 
@@ -26,6 +34,10 @@
 
 ### 2. Github Action Secrets 配置  🕹
 
+关于邮件配置，推荐使用QQ邮箱。163邮箱可能会有问题。
+
+ps:如下参数需要挨个配置；如不需邮件功能，需要修改 main.py 中的代码，删除对应的校验即可。
+
 | 变量 | 描述 |  示例 | 用途 |
 | --- | --- |  --- |  --- |
 | JUEJIN_USERNAME | 掘金登录帐号 |  xxx | 
@@ -37,7 +49,8 @@
 | MAIL_PASSWORD | 发件人邮箱密码 | xxxxxx |
 | MAIL_PORT | 邮箱服务器端口 |  465 |
 | MAIL_TO | 收信邮箱 | xxx.qq.com |
-| SWITCH | 自动发布开关 | on |
+| SWITCH | 脚本开关 | on |
+| PUBLISH_SWITCH | 自动发布开关 | off |
 
 ![image](https://user-images.githubusercontent.com/21220871/124370464-ba1dd380-dcaa-11eb-9c51-30cab0fdf98c.png)
 
