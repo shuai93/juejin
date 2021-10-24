@@ -10,7 +10,7 @@ jedi==0.18.0
 Jinja2==3.0.1
 MarkupSafe==2.0.1
 numpy==1.19.5
-opencv-python==4.5.2.54
+opencv-python
 parso==0.8.2
 pexpect==4.8.0
 pickleshare==0.7.5
