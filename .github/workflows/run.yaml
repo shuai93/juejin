@@ -27,7 +27,6 @@ jobs:
         
       - name: Install chrome version
         run: |
-          apt-get update
           apt-get install wget
           apt-get install unzip
           LATEST=$(google-chrome --version)
