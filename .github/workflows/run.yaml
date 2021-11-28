@@ -14,10 +14,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Set up chromedriver
-        uses: browser-actions/setup-chrome@v0.0.0
+#       - name: Set up chromedriver
+#         uses: nanasess/setup-chromedriver@master
+#         with:
+#             # Optional: do not specify to match Chrome's version
+#             chromedriver-version: '88.0.4324.96'
+      
+      - name: Set up chrome
+      - uses: browser-actions/setup-chrome@latest
         with:
-          chromium-version: '94.0.4606.61'
+            chrome-version: 94.0.4606.71
+          
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
