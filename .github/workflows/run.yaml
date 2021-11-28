@@ -17,7 +17,7 @@ jobs:
       - uses: nanasess/setup-chromedriver@master
         with:
           # Optional: do not specify to match Chrome's version
-          chromedriver-version: '96.0.4664.45'
+          chromedriver-version: '94.0.4606.61'
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
