@@ -27,10 +27,10 @@ jobs:
         
       - name: Install chrome version
         run: |
-          apt-get install wget
-          apt-get install unzip
+          sudo apt-get install wget
+          sudo apt-get install unzip
           LATEST=$(google-chrome --version)
-          wget http://chromedriver.storage.googleapis.com/$LATEST/chromedriver_linux64.zip
+          sudo wget http://chromedriver.storage.googleapis.com/$LATEST/chromedriver_linux64.zip
           unzip chromedriver_linux64.zip
           chmod +x chromedriver 
           sudo mv chromedriver /usr/bin/
