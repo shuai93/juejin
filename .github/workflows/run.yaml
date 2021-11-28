@@ -21,9 +21,10 @@ jobs:
 #             chromedriver-version: '88.0.4324.96'
       
       - name: Set up chrome
-      - uses: browser-actions/setup-chrome@latest
+        uses: browser-actions/setup-chrome@latest
         with:
             chrome-version: 94.0.4606.71
+        
           
       - name: Set up Python
         uses: actions/setup-python@v2
