@@ -29,7 +29,7 @@ jobs:
         run: |
           sudo apt-get install wget
           sudo apt-get install unzip
-          LATEST=$(google-chrome --version)
+          LATEST=$(google-chrome --product-version)
           sudo wget "https://chromedriver.storage.googleapis.com/$LATEST/chromedriver_linux64.zip"
           unzip chromedriver_linux64.zip
           chmod +x chromedriver 
