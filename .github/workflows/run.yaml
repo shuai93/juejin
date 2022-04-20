@@ -29,8 +29,9 @@ jobs:
         run: |
           sudo apt-get install wget
           sudo apt-get install unzip
-          LATEST=$(google-chrome --product-version)
-          echo LATEST
+          LATEST=$(google-chrome --product-version)100.0.4896.60
+          LATEST=100.0.4896.60
+          echo $LATEST
           sudo wget "https://chromedriver.storage.googleapis.com/$LATEST/chromedriver_linux64.zip"
           unzip chromedriver_linux64.zip
           chmod +x chromedriver 
