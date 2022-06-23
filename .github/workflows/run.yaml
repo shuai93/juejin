@@ -13,22 +13,9 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-      - uses: actions/checkout@v2
-#       - name: Set up chromedriver
-#         uses: nanasess/setup-chromedriver@master
-#         with:
-#             # Optional: do not specify to match Chrome's version
-#             chromedriver-version: '88.0.4324.96'
       
-#       - name: Set up chrome
-#         uses: browser-actions/setup-chrome@latest
-#         with:
-#             chrome-version: 94.0.4606.71
-      
-      - uses: browser-actions/setup-chrome@latest
-      - run: chrome --version
-        
-      - name: Install chrome version
+
+      - name: Install chrome driver
         run: |
           sudo apt-get install wget
           sudo apt-get install unzip
