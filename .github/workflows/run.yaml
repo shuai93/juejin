@@ -34,7 +34,11 @@ jobs:
           sudo apt-get install unzip
           LATEST=$(google-chrome --product-version)
           echo $LATEST
-          sudo wget "https://chromedriver.storage.googleapis.com/$LATEST/chromedriver_linux64.zip"
+          base_url="http://chromedriver.storage.googleapis.com/LATEST_RELEASE_"
+          url=$base_url${LATEST%%.*}
+          result=$(curl $url)
+          echo $result
+          sudo wget "https://chromedriver.storage.googleapis.com/$result/chromedriver_linux64.zip"
           unzip chromedriver_linux64.zip
           chmod +x chromedriver 
           sudo mv chromedriver /usr/bin/
