@@ -24,6 +24,9 @@ jobs:
 #         uses: browser-actions/setup-chrome@latest
 #         with:
 #             chrome-version: 94.0.4606.71
+      
+      - uses: browser-actions/setup-chrome@latest
+      - run: chrome --version
         
       - name: Install chrome version
         run: |
