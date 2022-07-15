@@ -95,6 +95,8 @@ class JuejinDriver(object):
         login_button = self.driver.find_element(By.XPATH, '''//button[text()="登录"]''')
 
         ActionChains(self.driver).move_to_element(login_button).click().perform()
+        
+        time.sleep(5)
 
         other_login_span = self.driver.find_element(By.XPATH, '''//span[text()="
           其他登录方式
