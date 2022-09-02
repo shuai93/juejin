@@ -92,7 +92,9 @@ class JuejinDriver(object):
 
     def prepare_login(self):
 
-        login_button = self.driver.find_element(By.XPATH, '''//button[text()="登录"]''')
+        login_button = self.driver.find_element(By.XPATH, '''//button[text()="
+                登录
+                "]''')
 
         ActionChains(self.driver).move_to_element(login_button).click().perform()
         
