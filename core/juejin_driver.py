@@ -120,7 +120,7 @@ class JuejinDriver(object):
 
     def do_sign(self):
         self.driver.get("https://juejin.cn/user/center/signin")
-        time.sleep(4)
+        time.sleep(10)
 
         try:
             signed_button = self.driver.find_element(By.XPATH, '''//button[text()="
