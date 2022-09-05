@@ -79,6 +79,8 @@ class JuejinDriver(object):
             ActionChains(self.driver).move_by_offset(xoffset=t, yoffset=0).perform()
         # 释放鼠标
         ActionChains(self.driver).release(on_element=verify_div).perform()
+        
+        time.sleep(8)
 
     def get_verify_image_url(self):
 
@@ -120,7 +122,7 @@ class JuejinDriver(object):
 
     def do_sign(self):
         self.driver.get("https://juejin.cn/user/center/signin")
-        time.sleep(10)
+        time.sleep(5)
 
         try:
             signed_button = self.driver.find_element(By.XPATH, '''//button[text()="
