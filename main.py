@@ -51,7 +51,7 @@ def main():
             message = "抽奖成功，奖品为：" + lottery_result.get("data", {}).get("lottery_name")
 
         else:
-            message = "抽奖失败，接口返回值：" + lottery_result
+            message = "抽奖失败，接口返回值：" + str(lottery_result)
 
     elif sign_return is False:
         message = "今日已签到！"
