@@ -13,7 +13,7 @@ from .config import *
 class JuejinDriver(object):
 
     # 掘金首页
-    juejin_home = "https://juejin.cn/user/993614678985085"
+    juejin_home = "https://juejin.cn"
 
     # 掘金签到页面
     juejin_sign = "https://juejin.cn/user/center/signin"
