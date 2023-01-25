@@ -103,8 +103,8 @@ class JuejinDriver(object):
         time.sleep(5)
 
         other_login_span = self.driver.find_element(By.XPATH, '''//span[text()="
-          其他登录方式
-        "]''')
+              密码登录
+            "]''')
 
         ActionChains(self.driver).move_to_element(other_login_span).click().perform()
 
@@ -116,8 +116,8 @@ class JuejinDriver(object):
         password_input.send_keys(self.juejin_password)
 
         login_button = self.driver.find_element(By.XPATH, '''//button[text()="
-        登录
-      "]''')
+              登录
+            "]''')
         ActionChains(self.driver).move_to_element(login_button).click().perform()
 
     def do_sign(self):
