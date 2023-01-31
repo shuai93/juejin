@@ -1,5 +1,6 @@
 
 import time
+import random
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver import ActionChains
@@ -72,15 +73,14 @@ class JuejinDriver(object):
 
         # 按下鼠标左键
         ActionChains(self.driver).click_and_hold(verify_div).perform()
-        time.sleep(0.5)
         # 遍历轨迹进行滑动
         for t in slide_track:
-            time.sleep(0.01)
             ActionChains(self.driver).move_by_offset(xoffset=t, yoffset=0).perform()
         # 释放鼠标
+        time.sleep(0.2)
         ActionChains(self.driver).release(on_element=verify_div).perform()
-        
-        time.sleep(8)
+        time.sleep(random.randint(2,5))
+
 
     def get_verify_image_url(self):
 
